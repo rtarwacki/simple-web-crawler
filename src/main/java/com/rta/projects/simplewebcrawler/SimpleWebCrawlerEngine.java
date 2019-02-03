@@ -7,11 +7,36 @@ import java.util.Set;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class SimpleWebCrawlerEngine {
 	
 	public static Set<String> urlResult = new HashSet<>();
 	public static Set<String> incorrectUrlResult = new HashSet<>();
+	
+	public static void searchUrl(String url, String filter) {
+		Document doc;
+		try {
+			doc = Jsoup.connect(url).get();
+
+			Elements links = doc.select("a[href]");
+			for (Element link : links) {
+				String href = link.attr("href");
+				if (href.contains(filter)) {
+					urlResult.add(href);
+				} else {
+					incorrectUrlResult.add(href);
+				}
+			}
+		} catch (UnknownHostException e) {
+			System.out.println(e);
+			return;
+		} catch (IOException e) {
+			System.out.println(e);
+			return;
+		}
+	}
 	
 	public static boolean checkUrlConnetion(String url) {
 		try {
