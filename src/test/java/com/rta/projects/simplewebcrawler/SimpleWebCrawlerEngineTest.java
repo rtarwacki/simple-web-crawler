@@ -5,9 +5,9 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple App.
+ * Unit test for simple web crawler.
  */
-public class AppTest 
+public class SimpleWebCrawlerEngineTest 
     extends TestCase
 {
     /**
@@ -15,7 +15,7 @@ public class AppTest
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName )
+    public SimpleWebCrawlerEngineTest( String testName )
     {
         super( testName );
     }
@@ -25,11 +25,11 @@ public class AppTest
      */
     public static Test suite()
     {
-        return new TestSuite( AppTest.class );
+        return new TestSuite( SimpleWebCrawlerEngineTest.class );
     }
 
     /**
-     * Rigourous Test :-)
+     * Tests
      */
     public void testApp()
     {
