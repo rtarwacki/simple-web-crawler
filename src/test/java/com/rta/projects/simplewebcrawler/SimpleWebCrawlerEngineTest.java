@@ -37,4 +37,20 @@ public class SimpleWebCrawlerEngineTest extends TestCase {
 		assertFalse(SimpleWebCrawlerEngine.checkUrlConnetion(url));
 	}
 
+    public void testShowUrlResult()
+    {
+    	SimpleWebCrawlerEngine.urlResult.add("https://wiprodigital.com/who-we-are");
+    	SimpleWebCrawlerEngine.urlResult.add("https://wiprodigital.com/what-we-think");
+    	SimpleWebCrawlerEngine.urlResult.add("https://wiprodigital.com/privacy-policy");
+    	SimpleWebCrawlerEngine.urlResult.add("https://wiprodigital.com/designit-approach");
+        assertEquals(4,  SimpleWebCrawlerEngine.showUrlResult() );
+    }
+    
+    public void testShowIncorrectUrlResult()
+    {
+    	SimpleWebCrawlerEngine.incorrectUrlResult.add("https://www.linkedin.com/in/sandhyararun");
+    	SimpleWebCrawlerEngine.incorrectUrlResult.add("https://twitter.com/kiran_minnas");
+    	SimpleWebCrawlerEngine.incorrectUrlResult.add("https://twitter.com/georgeioannou");
+        assertEquals(3,  SimpleWebCrawlerEngine.showIncorrectUrlResult() );
+    }
 }
