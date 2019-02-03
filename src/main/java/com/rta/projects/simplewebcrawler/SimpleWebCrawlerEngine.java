@@ -11,10 +11,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class SimpleWebCrawlerEngine {
-	
+	private static final int MAX_NUMBER_OF_PAGES_FOUND = 10;
+
 	public static Set<String> urlResult = new HashSet<>();
 	public static Set<String> incorrectUrlResult = new HashSet<>();
-	
+
 	public static void searchUrl(String url, String filter) {
 		Document doc;
 		try {
@@ -22,6 +23,10 @@ public class SimpleWebCrawlerEngine {
 
 			Elements links = doc.select("a[href]");
 			for (Element link : links) {
+				if ((urlResult.size() == MAX_NUMBER_OF_PAGES_FOUND)) {
+					return;
+				}
+
 				String href = link.attr("href");
 				if (href.contains(filter)) {
 					urlResult.add(href);
@@ -37,7 +42,7 @@ public class SimpleWebCrawlerEngine {
 			return;
 		}
 	}
-	
+
 	public static boolean checkUrlConnetion(String url) {
 		try {
 			Document doc = Jsoup.connect(url).get();
@@ -50,7 +55,7 @@ public class SimpleWebCrawlerEngine {
 			return false;
 		}
 	}
-	
+
 	public static int showUrlResult() {
 		System.out.println("--- url result");
 		for (String url : urlResult) {
