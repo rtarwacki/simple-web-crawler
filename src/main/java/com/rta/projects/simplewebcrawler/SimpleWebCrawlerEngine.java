@@ -3,6 +3,8 @@ package com.rta.projects.simplewebcrawler;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 import org.jsoup.Jsoup;
@@ -11,8 +13,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class SimpleWebCrawlerEngine {
-	private static final int MAX_NUMBER_OF_PAGES_FOUND = 10;
+	private static final int MAX_NUMBER_OF_PAGES_FOUND = 50;
+	private static final int MAX_QUEUE_SAFE_SIZE = 500;
 
+	public static Queue<String> queueResult = new LinkedList<>();
 	public static Set<String> urlResult = new HashSet<>();
 	public static Set<String> incorrectUrlResult = new HashSet<>();
 
@@ -23,17 +27,21 @@ public class SimpleWebCrawlerEngine {
 
 			Elements links = doc.select("a[href]");
 			for (Element link : links) {
-				if ((urlResult.size() == MAX_NUMBER_OF_PAGES_FOUND)) {
+				if ((urlResult.size() == MAX_NUMBER_OF_PAGES_FOUND) || (queueResult.size() == MAX_QUEUE_SAFE_SIZE)) {
 					return;
 				}
 
 				String href = link.attr("href");
 				if (href.contains(filter)) {
+					queueResult.add(href);
 					urlResult.add(href);
 				} else {
 					incorrectUrlResult.add(href);
 				}
 			}
+
+			searchUrl(queueResult.remove(), filter);
+
 		} catch (UnknownHostException e) {
 			System.out.println(e);
 			return;
