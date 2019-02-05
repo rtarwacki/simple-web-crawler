@@ -13,14 +13,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class SimpleWebCrawlerEngine {
-	private static final int MAX_NUMBER_OF_PAGES_FOUND = 50;
-	private static final int MAX_QUEUE_SAFE_SIZE = 500;
+	private final int MAX_NUMBER_OF_PAGES_FOUND = 50;
+	private final int MAX_QUEUE_SAFE_SIZE = 500;
 
-	public static Queue<String> queueResult = new LinkedList<>();
-	public static Set<String> urlResult = new HashSet<>();
-	public static Set<String> incorrectUrlResult = new HashSet<>();
+	public Queue<String> queueResult = new LinkedList<>();
+	public Set<String> urlResult = new HashSet<>();
+	public Set<String> incorrectUrlResult = new HashSet<>();
 
-	public static void searchUrl(String url, String filter) {
+	public void searchUrl(String url, String filter) {
 		Document doc;
 		try {
 			doc = Jsoup.connect(url).get();
@@ -51,7 +51,7 @@ public class SimpleWebCrawlerEngine {
 		}
 	}
 
-	public static boolean checkUrlConnetion(String url) {
+	public boolean checkUrlConnetion(String url) {
 		try {
 			Document doc = Jsoup.connect(url).get();
 			return true;
@@ -64,7 +64,7 @@ public class SimpleWebCrawlerEngine {
 		}
 	}
 
-	public static int showUrlResult() {
+	public int showUrlResult() {
 		System.out.println("--- url result");
 		for (String url : urlResult) {
 			System.out.println(url);
@@ -72,7 +72,7 @@ public class SimpleWebCrawlerEngine {
 		return urlResult.size();
 	}
 
-	public static int showIncorrectUrlResult() {
+	public int showIncorrectUrlResult() {
 		System.out.println("--- incorrect url result");
 		for (String url : incorrectUrlResult) {
 			System.out.println(url);

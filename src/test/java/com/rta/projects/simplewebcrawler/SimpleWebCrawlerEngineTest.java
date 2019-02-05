@@ -28,29 +28,31 @@ public class SimpleWebCrawlerEngineTest extends TestCase {
 	 * Tests
 	 */
 	public void testCorrectConnetion() {
+		SimpleWebCrawlerEngine engine = new SimpleWebCrawlerEngine();
 		String url = "http://wiprodigital.com";
-		assertTrue(SimpleWebCrawlerEngine.checkUrlConnetion(url));
+		assertTrue(engine.checkUrlConnetion(url));
 	}
 
 	public void testIncorrectConnetion() {
+		SimpleWebCrawlerEngine engine = new SimpleWebCrawlerEngine();
 		String url = "http://wipro12345digital.com";
-		assertFalse(SimpleWebCrawlerEngine.checkUrlConnetion(url));
+		assertFalse(engine.checkUrlConnetion(url));
 	}
 
-    public void testShowUrlResult()
-    {
-    	SimpleWebCrawlerEngine.urlResult.add("https://wiprodigital.com/who-we-are");
-    	SimpleWebCrawlerEngine.urlResult.add("https://wiprodigital.com/what-we-think");
-    	SimpleWebCrawlerEngine.urlResult.add("https://wiprodigital.com/privacy-policy");
-    	SimpleWebCrawlerEngine.urlResult.add("https://wiprodigital.com/designit-approach");
-        assertEquals(4,  SimpleWebCrawlerEngine.showUrlResult() );
-    }
-    
-    public void testShowIncorrectUrlResult()
-    {
-    	SimpleWebCrawlerEngine.incorrectUrlResult.add("https://www.linkedin.com/in/sandhyararun");
-    	SimpleWebCrawlerEngine.incorrectUrlResult.add("https://twitter.com/kiran_minnas");
-    	SimpleWebCrawlerEngine.incorrectUrlResult.add("https://twitter.com/georgeioannou");
-        assertEquals(3,  SimpleWebCrawlerEngine.showIncorrectUrlResult() );
-    }
+	public void testShowUrlResult() {
+		SimpleWebCrawlerEngine engine = new SimpleWebCrawlerEngine();
+		engine.urlResult.add("https://wiprodigital.com/who-we-are");
+		engine.urlResult.add("https://wiprodigital.com/what-we-think");
+		engine.urlResult.add("https://wiprodigital.com/privacy-policy");
+		engine.urlResult.add("https://wiprodigital.com/designit-approach");
+		assertEquals(4, engine.showUrlResult());
+	}
+
+	public void testShowIncorrectUrlResult() {
+		SimpleWebCrawlerEngine engine = new SimpleWebCrawlerEngine();
+		engine.incorrectUrlResult.add("https://www.linkedin.com/in/sandhyararun");
+		engine.incorrectUrlResult.add("https://twitter.com/kiran_minnas");
+		engine.incorrectUrlResult.add("https://twitter.com/georgeioannou");
+		assertEquals(3, engine.showIncorrectUrlResult());
+	}
 }
